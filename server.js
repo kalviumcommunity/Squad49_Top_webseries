@@ -3,30 +3,35 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('Error connecting to MongoDB:', err));
-
-// Define a schema and model if needed
-// const Schema = mongoose.Schema;
-// const YourModel = mongoose.model('YourModel', new Schema({ /* schema definition */ }));
-
-app.get('/ping', (req, res) => {
-    res.send('pong');
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
-// Add a route to check database connection status
-app.get('/', (req, res) => {
-    const dbStatus = mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected';
-    res.send(`Database Connection Status: ${dbStatus}`);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+app.get("/ping", (req, res) => {
+    res.json({ message: "pong" });
+  });
+
+// Home route
+app.get("/status", (req, res) => {
+    const databaseStatus = db.readyState === 1 ? "connected" : "disconnected";
+    res.json({
+      message: "o_O",
+      database: databaseStatus,
+    });
+  });
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 server running on PORT: ${PORT}`);
 });
