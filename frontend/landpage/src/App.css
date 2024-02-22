@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Make the container at least as tall as the viewport */
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+main {
+  flex: 6; 
+  display: flex;
+  flex-direction: column;
+  margin-left: 360px;
+}
+
+.hero,
+.featured,
+.categories,
+.trending,
+.about {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.hero h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem; /* Increase font size */
+}
+
+.hero p {
+  margin-bottom: 1.5rem; 
+  font-size: 1.2rem; 
+  color: #555; 
+}
+
+.hero button {
+  padding: 0.75rem 1.5rem; 
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem; 
+  transition: background-color 0.3s ease; 
+}
+
+.hero button:hover {
+  background-color: #0056b3; 
+}
+
+.featured,
+.categories,
+.trending,
+.about {
+  background-color: #fff;
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.featured h2,
+.categories h2,
+.trending h2,
+.about h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem; 
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #555; /* Add a border on top */
+}
