@@ -1,0 +1,54 @@
+[
+    {
+      "_id": "65d5a8825fd0942c0bbb289c",
+      "title": "Operation Genesis",
+      "genre": "Crime",
+      "platform": "NetVid",
+      "release_date": "2018-03-12",
+      "description": "A group of thieves execute a meticulously planned operation",
+      "average_rating": 8.5,
+      "reviews": [],
+      "creators": [],
+      "number_of_seasons": 4,
+      "total_episodes": 28
+    },
+    {
+      "_id": "65d5a8825fd0942c0bbb289d",
+      "title": "Urban Tales",
+      "genre": "Comedy",
+      "platform": "Prime Showtime",
+      "release_date": "2017-06-18",
+      "description": "A witty woman's antics in the urban jungle",
+      "average_rating": 8.7,
+      "reviews": [],
+      "creators": [],
+      "number_of_seasons": 2,
+      "total_episodes": 12
+    },
+    {
+      "_id": "65d5a8825fd0942c0bbb289e",
+      "title": "Mirzapur",
+      "genre": "Crime",
+      "platform": "Amazon Prime",
+      "release_date": "2018-11-16",
+      "description": "A lawless land filled with action, crime, and power play",
+      "average_rating": 8.4,
+      "reviews": [],
+      "creators": [],
+      "number_of_seasons": 2,
+      "total_episodes": 19
+    },
+    {
+      "_id": "65d5a8825fd0942c0bbb289f",
+      "title": "Sacred Games",
+      "genre": "Crime",
+      "platform": "Netflix",
+      "release_date": "2018-07-06",
+      "description": "Unraveling the nexus between organized crime, corruption, and politics…",
+      "average_rating": 8.7,
+      "reviews": [],
+      "creators": [],
+      "number_of_seasons": 2,
+      "total_episodes": 16
+    }
+]
