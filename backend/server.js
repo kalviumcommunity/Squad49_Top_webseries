@@ -37,9 +37,21 @@ app.get("/", (req, res) => {
   });
 });
 
+// Route to fetch web series data
+const cors = require("cors")
+app.use(cors())
+
+const show = require("./models/webseries.js")
+
+app.get('/webseries_data', async (req, res) => {
+  let value = await show.find()
+  console.log(value)
+  res.send(value) 
+});
+
 // Start server
 const server = app.listen(PORT, () => {
   console.log(`🚀 server running on PORT: ${PORT}`);
 });
-
+ 
 module.exports = server;
