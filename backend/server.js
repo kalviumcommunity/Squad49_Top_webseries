@@ -33,8 +33,9 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
             res.status(500).json({ error: 'Internal server error' });
         }
     });
-});
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    // Start server
+    const server = app.listen(PORT, () => {
+        console.log(`🚀 Server running on PORT: ${PORT}`);
+    });
 });
