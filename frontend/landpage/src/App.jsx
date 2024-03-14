@@ -1,5 +1,6 @@
 import React from 'react';
 import ShowInfo from './components/ShowInfo';
+import AddEntityPage from './components/AddEntityPage';
 
 const App = () => {
   return (
