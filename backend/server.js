@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
+const Joi = require('joi');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,12 @@ app.use(bodyParser.json());
 
 const url = 'mongodb://localhost:27017';
 const dbName = 'your_database_name';
+
+// entity validation
+const entitySchema = Joi.object({
+    entityName: Joi.string().required(),
+    entityDescription: Joi.string().required()
+});
 
 // connect with mongoDB
 MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
@@ -25,9 +32,10 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
         try {
             const { entityName, entityDescription } = req.body;
 
-            // validation
-            if (!entityName || typeof entityName !== 'string' || !entityDescription || typeof entityDescription !== 'string') {
-                return res.status(400).json({ error: 'Invalid data. Both entityName and entityDescription are required and must be strings.' });
+            // validate request body using Joi schema
+            const { error } = entitySchema.validate({ entityName, entityDescription });
+            if (error) {
+                return res.status(400).json({ error: error.details[0].message });
             }
 
             const collection = db.collection('entities');
