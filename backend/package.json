@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/kalviumcommunity/Squad49_Top_webseries#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "joi": "^17.12.2",
