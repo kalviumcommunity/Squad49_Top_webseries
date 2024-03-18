@@ -7,10 +7,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+// MongoDB connection URL
 const url = 'mongodb://localhost:27017';
 const dbName = 'your_database_name';
 
-// connect with mongoDB
+// Connect to MongoDB
 MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
     if (err) {
         console.error('Error connecting to MongoDB:', err);
@@ -20,16 +21,10 @@ MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (e
 
     const db = client.db(dbName);
 
-    // endpoint to add entity
+    // Endpoint to add entity
     app.post('/api/entities', async (req, res) => {
         try {
             const { entityName, entityDescription } = req.body;
-
-            // validation
-            if (!entityName || typeof entityName !== 'string' || !entityDescription || typeof entityDescription !== 'string') {
-                return res.status(400).json({ error: 'Invalid data. Both entityName and entityDescription are required and must be strings.' });
-            }
-
             const collection = db.collection('entities');
             const result = await collection.insertOne({ name: entityName, description: entityDescription });
             res.status(201).json(result.ops[0]);
