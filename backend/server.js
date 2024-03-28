@@ -10,7 +10,7 @@ const PORT = 3000;
 app.use(bodyParser.json());
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'WebSeries'; 
+const dbName = 'WebSeries';
 
 // Defining Mongoose Schema
 const userSchema = new mongoose.Schema({
@@ -65,14 +65,15 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        
+        // Compare passwords
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        const token = jwt.sign({ username: user.username }, 'your_secret_key', { expiresIn: '1h' });
+        // Generate JWT token
+        const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({ token });
     } catch (error) {
@@ -81,7 +82,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-
+// Middleware to authenticate JWT token
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -90,7 +91,7 @@ const authenticateToken = (req, res, next) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    jwt.verify(token, 'your_secret_key', (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
             return res.status(403).json({ error: 'Forbidden' });
         }
@@ -99,6 +100,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
+// Protected route example
 app.get('/protected', authenticateToken, (req, res) => {
     res.json(req.user);
 });
