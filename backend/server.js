@@ -10,7 +10,7 @@ const PORT = 3000;
 app.use(bodyParser.json());
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'my_database_name'; 
+const dbName = 'WebSeries'; 
 
 // Defining Mongoose Schema
 const userSchema = new mongoose.Schema({
@@ -18,12 +18,14 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true }
 });
 
+// Creating Mongoose Model
 const User = mongoose.model('User', userSchema);
 
+// Connecting to MongoDB using Mongoose
 mongoose.connect(`${url}/${dbName}`)
     .then(() => {
         console.log('Connected to MongoDB');
-        
+        // Start server
         app.listen(PORT, () => {
             console.log(`🚀 Server running on PORT: ${PORT}`);
         });
@@ -37,10 +39,10 @@ app.post('/register', async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        
+        // Hash the password before saving it to the database
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        
+        // Create new user using Mongoose model
         const user = new User({ username, password: hashedPassword });
         await user.save();
 
@@ -56,7 +58,7 @@ app.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        
+        // Find the user by username
         const user = await User.findOne({ username });
 
         if (!user) {
@@ -70,7 +72,6 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        // Generating JWT token
         const token = jwt.sign({ username: user.username }, 'your_secret_key', { expiresIn: '1h' });
 
         res.status(200).json({ token });
@@ -97,7 +98,6 @@ const authenticateToken = (req, res, next) => {
         next();
     });
 };
-
 
 app.get('/protected', authenticateToken, (req, res) => {
     res.json(req.user);
