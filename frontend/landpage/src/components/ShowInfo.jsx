@@ -13,7 +13,7 @@ const ShowInfo = () => {
 
   return (
     <div>
-      <h1>Shows Information</h1>
+      <h1>TOP WEB SERIES</h1>
       {data.map(show => (
         <div key={show._id}>
           <h2>{show.title}</h2>

@@ -1,0 +1,25 @@
+/* App.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://imgs.search.brave.com/qTg-RciabNY1uxTGEvb2I-Hpc2A0kPaxDu1nltKze5g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I2L2M1/LzY2L2I2YzU2NmRi/OTg2MjJjZjRhODNj/MzMxYjdjOTUwYjZk/LmpwZw');
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 500px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #fff;
+    margin-left: auto;
+  }
+  
