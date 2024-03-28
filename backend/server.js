@@ -1,54 +1,106 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { MongoClient } = require('mongodb');
-const Joi = require('joi');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.use(bodyParser.json());
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'your_database_name';
+const dbName = 'WebSeries';
 
-// entity validation
-const entitySchema = Joi.object({
-    entityName: Joi.string().required(),
-    entityDescription: Joi.string().required()
+// Defining Mongoose Schema
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true }
 });
 
-// connect with mongoDB
-MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-    if (err) {
+// Creating Mongoose Model
+const User = mongoose.model('User', userSchema);
+
+// Connecting to MongoDB using Mongoose
+mongoose.connect(`${url}/${dbName}`)
+    .then(() => {
+        console.log('Connected to MongoDB');
+        // Start server
+        app.listen(PORT, () => {
+            console.log(`🚀 Server running on PORT: ${PORT}`);
+        });
+    })
+    .catch(err => {
         console.error('Error connecting to MongoDB:', err);
-        return;
+    });
+
+// Endpoint to register a new user
+app.post('/register', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Hash the password before saving it to the database
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create new user using Mongoose model
+        const user = new User({ username, password: hashedPassword });
+        await user.save();
+
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-    console.log('Connected to MongoDB');
+});
 
-    const db = client.db(dbName);
+// Endpoint to authenticate and login a user
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-    // endpoint to add entity
-    app.post('/api/entities', async (req, res) => {
-        try {
-            const { entityName, entityDescription } = req.body;
+        // Find the user by username
+        const user = await User.findOne({ username });
 
-            // validate request body using Joi schema
-            const { error } = entitySchema.validate({ entityName, entityDescription });
-            if (error) {
-                return res.status(400).json({ error: error.details[0].message });
-            }
-
-            const collection = db.collection('entities');
-            const result = await collection.insertOne({ name: entityName, description: entityDescription });
-            res.status(201).json(result.ops[0]);
-        } catch (error) {
-            console.error('Error adding entity:', error);
-            res.status(500).json({ error: 'Internal server error' });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid username or password' });
         }
-    });
 
-    // Start server
-    const server = app.listen(PORT, () => {
-        console.log(`🚀 Server running on PORT: ${PORT}`);
+        // Compare passwords
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (!passwordMatch) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(200).json({ token });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Middleware to authenticate JWT token
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ error: 'Forbidden' });
+        }
+        req.user = user;
+        next();
     });
+};
+
+// Protected route example
+app.get('/protected', authenticateToken, (req, res) => {
+    res.json(req.user);
 });
