@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use('/', routes);
 
-// Defining Mongoose Schema
+const url = 'mongodb://localhost:27017';
+const dbName = 'WebSeries';
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -23,11 +25,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// Connecting  MongoDB using Mongoose
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-
     app.listen(PORT, () => {
       console.log(`🚀 Server running on PORT: ${PORT}`);
     });
@@ -36,9 +36,8 @@ mongoose.connect(process.env.MONGODB_URI)
     console.error('Error connecting to MongoDB:', err);
   });
 
-// Middleware to authenticate token
 const authenticateToken = (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.token || req.headers['authorization'];
 
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });
@@ -88,11 +87,7 @@ app.post('/login', (req, res) => {
 
   User.findOne({ username })
     .then(user => {
-      if (!user) {
-        return res.status(400).json({ error: 'Invalid credentials' });
-      }
-
-      if (!bcrypt.compareSync(password, user.password)) {
+      if (!user || !bcrypt.compareSync(password, user.password)) {
         return res.status(400).json({ error: 'Invalid credentials' });
       }
 
@@ -104,7 +99,7 @@ app.post('/login', (req, res) => {
         process.env.JWT_SECRET,
         {
           expiresIn: '1h',
-        },
+        }
       );
 
       // Setting token in cookie
