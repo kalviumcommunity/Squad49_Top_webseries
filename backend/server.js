@@ -78,18 +78,28 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Add entity route
-app.post('/api/entities', async (req, res) => {
-  const { entityName, entityDescription } = req.body;
+// Middleware to authenticate JWT token
+const authenticateToken = (req, res, next) => {
   const token = req.cookies.token;
-
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+    req.user = user;
+    next();
+  });
+};
+
+// Add entity route
+app.post('/api/entities', authenticateToken, async (req, res) => {
+  const { entityName, entityDescription } = req.body;
+
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const newEntity = new Entity({ entityName, entityDescription, created_by: decoded.id });
+    const newEntity = new Entity({ entityName, entityDescription, created_by: req.user.id });
     await newEntity.save();
 
     const entities = await Entity.find();
@@ -128,7 +138,7 @@ app.get('/api/entities/:id', async (req, res) => {
 });
 
 // Update entity route
-app.put('/api/entities/:id', async (req, res) => {
+app.put('/api/entities/:id', authenticateToken, async (req, res) => {
   const { entityName, entityDescription } = req.body;
 
   try {
@@ -146,7 +156,7 @@ app.put('/api/entities/:id', async (req, res) => {
 });
 
 // Delete entity route
-app.delete('/api/entities/:id', async (req, res) => {
+app.delete('/api/entities/:id', authenticateToken, async (req, res) => {
   try {
     const entity = await Entity.findByIdAndDelete(req.params.id);
     if (!entity) {
