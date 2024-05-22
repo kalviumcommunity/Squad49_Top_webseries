@@ -1,13 +1,9 @@
-/* App.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('https://imgs.search.brave.com/qTg-RciabNY1uxTGEvb2I-Hpc2A0kPaxDu1nltKze5g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I2L2M1/LzY2L2I2YzU2NmRi/OTg2MjJjZjRhODNj/MzMxYjdjOTUwYjZk/LmpwZw');
-    background-size: cover;
-    background-attachment: fixed;
-    color: #fff;
+    color: #671818;
+    background-color: rgb(190, 154, 229);
   }
   
   .container {
@@ -19,7 +15,16 @@ body {
   
   h1 {
     text-align: center;
-    color: #fff;
-    margin-left: auto;
+    color: #000000;
+    margin-right: 200px;
+  }
+  .logout-button {
+    background-color: #df0000; 
+    color: #fff;  
+    margin-left: 800px;
+  }
+  
+  .logout-button:hover {
+    background-color: #000000; 
   }
   

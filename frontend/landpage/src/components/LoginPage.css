@@ -1,102 +1,61 @@
-
 .login-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333333;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-form label {
-    margin-bottom: 10px;
-    color: #333333;
-  }
-  
-  .login-form input[type="text"],
-  .login-form input[type="password"] {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-  }
-  
-  .login-form button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .login-form button:hover {
-    background-color: #0056b3;
-  }
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px; /* Add space between login and sign-up forms */
-  }
-  
-  .signup-form label {
-    margin-bottom: 10px;
-    color: #333333;
-  }
-  
-  .signup-form input[type="text"],
-  .signup-form input[type="email"],
-  .signup-form input[type="password"] {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-  }
-  
-  .signup-form button {
-    padding: 10px 20px;
-    background-color: #28a745; /* Green color for sign-up button */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .signup-form button:hover {
-    background-color: #218838; /* Darker green on hover */
-  }
-  .signup-option {
-    text-align: center; /* Align the button in the center */
-  }
-  
-  .signup-option button {
-    padding: 10px 20px;
-    background-color: #007bff; /* Blue color for sign-up button */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0 auto; /* Center the button horizontally */
-    display: block; /* Ensure the button takes up the full width */
-  }
-  
-  .signup-option button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  .or-text {
-    text-align: center;
-    margin: 10px 0;
-    color: #333333;
-  }
-  
+  width: 350px; 
+  margin: 100px auto; 
+  padding: 40px; 
+  background-color: #eecff0; 
+  border-radius: 10px; 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+  margin-left:35px;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 30px; 
+  color: #333333;
+}
+
+.login-form, .signup-form {
+  margin-bottom: 20px; 
+}
+
+.login-form label, .signup-form label {
+  margin-bottom: 8px; 
+  color: #333333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  padding: 12px; 
+  margin-bottom: 20px;
+  border: 1px solid #ced4da; 
+  border-radius: 6px; 
+  width: 100%; 
+}
+
+.login-form button, .signup-form button, .signup-option button {
+  padding: 12px 24px; 
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s; 
+}
+
+.login-form button:hover, .signup-form button:hover, .signup-option button:hover {
+  background-color: #0056b3;
+}
+
+.signup-option {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.or-text {
+  text-align: center;
+  margin: 15px 0; 
+  color: #333333;
+}

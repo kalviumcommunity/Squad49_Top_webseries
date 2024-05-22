@@ -1,54 +1,173 @@
 [
-    {
-      "_id": "65d5a8825fd0942c0bbb289c",
-      "title": "Operation Genesis",
-      "genre": "Crime",
+  {
+      "_id": "65dde27e0ae16272c3600dad",
+      "title": "Mystic Saga",
+      "genre": "Fantasy",
       "platform": "NetVid",
-      "release_date": "2018-03-12",
-      "description": "A group of thieves execute a meticulously planned operation",
-      "average_rating": 8.5,
-      "reviews": [],
-      "creators": [],
-      "number_of_seasons": 4,
-      "total_episodes": 28
-    },
-    {
-      "_id": "65d5a8825fd0942c0bbb289d",
-      "title": "Urban Tales",
-      "genre": "Comedy",
-      "platform": "Prime Showtime",
-      "release_date": "2017-06-18",
-      "description": "A witty woman's antics in the urban jungle",
-      "average_rating": 8.7,
-      "reviews": [],
-      "creators": [],
-      "number_of_seasons": 2,
-      "total_episodes": 12
-    },
-    {
-      "_id": "65d5a8825fd0942c0bbb289e",
-      "title": "Mirzapur",
-      "genre": "Crime",
-      "platform": "Amazon Prime",
-      "release_date": "2018-11-16",
-      "description": "A lawless land filled with action, crime, and power play",
+      "release_date": "2019-11-30",
+      "description": "Follows a warrior's journey in a world of magic",
       "average_rating": 8.4,
-      "reviews": [],
-      "creators": [],
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
       "number_of_seasons": 2,
-      "total_episodes": 19
-    },
-    {
-      "_id": "65d5a8825fd0942c0bbb289f",
+      "total_episodes": 16
+  },
+  {
+      "_id": "65dde27e0ae16272c3600dab",
+      "title": "Cipher",
+      "genre": "Drama",
+      "platform": ["NetVid"],
+      "release_date": "2016-04-03",
+      "description": "Explores the rise of computer technology in the 1990s",
+      "average_rating": 8.2,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 3,
+      "total_episodes": 30
+  },
+  {
+      "_id": "65dde27e0ae16272c3600daa",
+      "title": "Virtual Realm",
+      "genre": "Sci-Fi",
+      "platform": "NetVid",
+      "release_date": "2012-08-12",
+      "description": "An anthology series delving into futuristic technology",
+      "average_rating": 8.6,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 4,
+      "total_episodes": 18
+  },
+  {
+      "_id": "65dde27e0ae16272c3600db2",
       "title": "Sacred Games",
       "genre": "Crime",
       "platform": "Netflix",
       "release_date": "2018-07-06",
       "description": "Unraveling the nexus between organized crime, corruption, and politics…",
       "average_rating": 8.7,
-      "reviews": [],
-      "creators": [],
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {},
+          {}
+      ],
       "number_of_seasons": 2,
       "total_episodes": 16
-    }
+  },
+  {
+      "_id": "65dde27e0ae16272c3600dac",
+      "title": "Star Nomad",
+      "genre": "Sci-Fi",
+      "platform": "SkyFlix",
+      "release_date": "2018-10-08",
+      "description": "Chronicles a lone space traveler's adventures",
+      "average_rating": 8.9,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 2,
+      "total_episodes": 14
+  },
+  {
+      "_id": "65dde27e0ae16272c3600da9",
+      "title": "Shadow Lines",
+      "genre": "Drama",
+      "platform": "StreamX",
+      "release_date": "2015-05-05",
+      "description": "A gripping crime drama revolving around a powerful family",
+      "average_rating": 4.3,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 5,
+      "total_episodes": 52
+  },
+  {
+      "_id": "65dde27e0ae16272c3600daf",
+      "title": "Operation Genesis",
+      "genre": "Crime",
+      "platform": "NetVid",
+      "release_date": "2018-03-12",
+      "description": "A group of thieves execute a meticulously planned operation",
+      "average_rating": 8.5,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 4,
+      "total_episodes": 28
+  },
+  {
+      "_id": "65dde27e0ae16272c3600dae",
+      "title": "Renegades",
+      "genre": "Action",
+      "platform": "Prime Showtime",
+      "release_date": "2019-09-15",
+      "description": "Vigilantes take on superpowered adversaries",
+      "average_rating": 8.6,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 3,
+      "total_episodes": 22
+  },
+  {
+      "_id": "65dde27e0ae16272c3600db0",
+      "title": "Urban Tales",
+      "genre": "Comedy",
+      "platform": "Prime Showtime",
+      "release_date": "2017-06-18",
+      "description": "A witty woman's antics in the urban jungle",
+      "average_rating": 8.7,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 2,
+      "total_episodes": 12
+  },
+  {
+      "_id": "65dde27e0ae16272c3600db1",
+      "title": "Mirzapur",
+      "genre": "Crime",
+      "platform": "Amazon Prime",
+      "release_date": "2018-11-16",
+      "description": "A lawless land filled with action, crime, and power play",
+      "average_rating": 8.4,
+      "reviews": [
+          {}
+      ],
+      "creators": [
+          {}
+      ],
+      "number_of_seasons": 2,
+      "total_episodes": 19
+  }
 ]

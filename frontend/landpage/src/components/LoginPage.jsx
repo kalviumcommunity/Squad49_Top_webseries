@@ -1,48 +1,58 @@
-// LoginPage.jsx
-
 import React, { useState } from 'react';
-import './LoginPage.css'; // Import login page CSS
+import './LoginPage.css';
+import axios from 'axios';
 
-const LoginPage = ({ onLogin, onSignUp }) => {
+const LoginPage = ({ onLogin }) => {
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showSignUp, setShowSignUp] = useState(false); // State to toggle sign-up form visibility
+  const [showSignUp, setShowSignUp] = useState(false);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
+  const handleLoginUsernameChange = (e) => setLoginUsername(e.target.value);
+  const handleLoginPasswordChange = (e) => setLoginPassword(e.target.value);
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // You can add authentication logic here
-    // For simplicity, let's just call the onLogin prop with the username
-    onLogin(username);
+    try {
+      const response = await axios.post('http://localhost:3000/login', { username: loginUsername, password: loginPassword });
+      if (response.status === 200) {
+        const { token } = response.data;
+        onLogin(loginUsername, token);
+      } else {
+        console.error('Failed to login:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error.message);
+    }
   };
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-    // You can add sign-up logic here
-    // For simplicity, let's just call the onSignUp prop with the sign-up information
-    onSignUp({ username, email, password });
+    try {
+      if (password !== confirmPassword) {
+        console.error("Passwords do not match");
+        return;
+      }
+      const response = await axios.post('http://localhost:3000/register', { username, email, password });
+      if (response.status === 201) {
+        console.log('User registered successfully:', response.data);
+        
+      } else {
+        console.error('Failed to sign up:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+    }
   };
 
-  const toggleSignUpForm = () => {
-    setShowSignUp(!showSignUp);
-  };
+  const toggleSignUpForm = () => setShowSignUp(!showSignUp);
 
   return (
     <div className="login-container">
@@ -50,11 +60,11 @@ const LoginPage = ({ onLogin, onSignUp }) => {
       <form className="login-form" onSubmit={handleLoginSubmit}>
         <div>
           <label>Username:</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <input type="text" value={loginUsername} onChange={handleLoginUsernameChange} />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" value={loginPassword} onChange={handleLoginPasswordChange} />
         </div>
         <button type="submit">Login</button>
       </form>
